@@ -1,0 +1,15 @@
+{
+    "name": "matthewbaggett/interventio-home-agent",
+    "license": "GPL V2",
+    "authors": [
+        {
+            "name": "Matthew Baggett",
+            "email": "matthew@baggett.me"
+        }
+    ],
+    "require": {
+        "react/react": "0.4.*",
+        "eventsd/eventsd": "~1.0",
+        "openlss/lib-array2xml": "0.0.9"
+    }
+}
