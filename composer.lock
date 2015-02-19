@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ccc4d7c06b0fac6cffc3df2cb8b4bb9d",
+    "hash": "a741036b0ee65cd114749d0bd1b39265",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -659,6 +659,68 @@
                 "stream"
             ],
             "time": "2014-09-10 03:32:31"
+        },
+        {
+            "name": "thru.io/active_record",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/ActiveRecord.git",
+                "reference": "1a8ecdc5bcbedead54dac9e532448da3e41c48a3"
+            },
+            "require": {
+                "thru.io/json-pretty-printer": "1.0.*",
+                "thru.io/uuid": "1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "fzaninotto/faker": "1.5.*@dev",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Thru\\ActiveRecord\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "An active-record like implementation",
+            "time": "2015-02-18 11:00:17"
+        },
+        {
+            "name": "thru.io/json-pretty-printer",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/JsonPrettyPrinter.git",
+                "reference": "44f00ec368590c184faccbdbb395caa2aa6b080b"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Thru\\JsonPrettyPrinter\\": ""
+                }
+            },
+            "license": [
+                "GPL V2"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "A simple, well-tested JSON pretty printer and related stuff",
+            "time": "2015-02-18 10:41:12"
         },
         {
             "name": "thru.io/uuid",

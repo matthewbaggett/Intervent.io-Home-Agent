@@ -7,9 +7,37 @@
             "email": "matthew@baggett.me"
         }
     ],
+    "repositories": [
+        {
+            "url": "https://github.com/Thruio/ActiveRecord.git",
+            "type": "git"
+        },{
+            "url": "https://github.com/Thruio/SlimRouteTest.git",
+            "type": "git"
+        },{
+            "url": "https://github.com/Thruio/JsonPrettyPrinter.git",
+            "type": "git"
+        },{
+            "url": "https://github.com/eventsd/libeventsd.git",
+            "type": "git"
+        },{
+            "url": "https://github.com/eventsd/eventsd.git",
+            "type": "git"
+        },{
+            "url": "https://github.com/matthewbaggett/php-color",
+            "type": "git"
+        }
+    ],
     "require": {
         "react/react": "0.4.*",
         "eventsd/eventsd": "~1.0",
+        "thru.io/active_record": "0.2.2",
         "openlss/lib-array2xml": "0.0.9"
+    },
+    "autoload": {
+        "psr-4": {"Intervent\\HomeAgents\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": { "Intervent\\HomeAgents\\Tests\\": "tests/" }
     }
 }

@@ -1,5 +1,7 @@
 <?php
-use LSS\XML2Array;
+use \LSS\XML2Array;
+use \Intervent\HomeAgents\Models\NetworkLocation;
+
 $loop->addPeriodicTimer(1, function() {
   $export_file = "nmap." . date("Y-m-D_His") . ".xml";
   $ip_range = "10.0.0.1-255";
@@ -11,6 +13,22 @@ $loop->addPeriodicTimer(1, function() {
     $ip = $host['address']['@attributes']['addr'];
     $hostname = isset($host['hostnames']['hostname']) ? $host['hostnames']['hostname']['@attributes']['name'] : "";
     echo "{$ip} {$hostname}\n";
+
+    $is_new = false;
+    $network_location = NetworkLocation::search()->where("ip", $ip)->execOne();
+    if(!$network_location){
+      // New network location found
+      $network_location = new NetworkLocation();
+      $is_new = true;
+    }
+    $network_location->ip = $ip;
+    $network_location->hostname = $hostname;
+    $network_location->last_seen = date("Y-m-d H:i:s");
+    $network_location->save();
+
+    if($is_new){
+      \Eventsd\Eventsd::trigger("NetworkLocationFound", $network_location);
+    }
   }
 
   exit;
