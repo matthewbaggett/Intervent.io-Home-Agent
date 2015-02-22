@@ -4,6 +4,7 @@ function get_system_temperature()
 {
   if (file_exists("/opt/vc/bin/vcgencmd")) {
     exec("/opt/vc/bin/vcgencmd measure_temp", $temperature);
+    var_dump($temperature);
     return str_replace("'C", "", str_replace("temp=", "", $temperature));
   }
   if (file_exists("/usr/bin/sensors")) {
