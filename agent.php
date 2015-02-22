@@ -17,4 +17,5 @@ require_once("agents/bluetooth-le-scan.php");
 require_once("agents/netscan.php");
 require_once("agents/temperature.php");
 
+echo "Starting Agent Loop\n";
 $loop->run();

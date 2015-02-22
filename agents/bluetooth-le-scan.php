@@ -2,7 +2,7 @@
 
 $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
   $hci_log = APP_ROOT . "/hci.txt";
-  $scan_delay = 3;
+  $scan_delay = 5;
   $scan_command = "hcitool lescan > {$hci_log} & (sleep {$scan_delay}; killall -INT hcitool)";
   //echo "Scanning for bluetooth LE devices:\n";
   //echo " > {$scan_command}\n";
@@ -30,6 +30,7 @@ $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
     }else{
       // New.
       echo "Bluetooth LE: Found new device: {$detected_mac}\n";
+      \Eventsd\Eventsd::trigger("BluetoothLEFound", ["mac" => $detected_mac, "name" => $detected_name]);
     }
   }
 
@@ -38,6 +39,7 @@ $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
       if (!isset($detected_devices[$existing_mac])) {
         // Missing
         echo "Bluetooth LE: Missing device: {$existing_mac}\n";
+        \Eventsd\Eventsd::trigger("BluetoothLELost", ["mac" => $existing_mac, "name" => $existing_name]);
       }
     }
   }
