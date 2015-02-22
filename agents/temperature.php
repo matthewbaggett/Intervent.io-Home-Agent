@@ -4,8 +4,12 @@ function get_system_temperature()
 {
   if (file_exists("/opt/vc/bin/vcgencmd")) {
     exec("/opt/vc/bin/vcgencmd measure_temp", $temperature);
-    var_dump($temperature);
-    return str_replace("'C", "", str_replace("temp=", "", $temperature));
+
+    if(substr($temperature[0],0,5) == "temp=") {
+      return str_replace("'C", "", str_replace("temp=", "", $temperature[0]));
+    }else{
+      return false;
+    }
   }
   if (file_exists("/usr/bin/sensors")) {
     $lm_sensors = new Intervent\HomeAgents\Sensors\LMSensors();

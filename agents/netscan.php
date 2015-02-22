@@ -22,7 +22,7 @@ $loop->addPeriodicTimer(60, function() {
         }
       }
       if(!$exists){
-        echo "Lost Network Location: {$expected_location->ip}\n";
+        echo "Netscan: Lost Network Location: {$expected_location->ip}\n";
         \Eventsd\Eventsd::trigger("NetworkLocationLost", $expected_location);
       }
     }
@@ -54,11 +54,11 @@ $loop->addPeriodicTimer(60, function() {
     $network_location->save();
 
     if($is_new){
-      echo "New Network Location: {$network_location->ip}\n";
+      echo "Netscan: New Network Location: {$network_location->ip}\n";
       \Eventsd\Eventsd::trigger("NetworkLocationFound", $network_location);
     }
     if($is_returning){
-      echo "Returning Network Location: {$network_location->ip}\n";
+      echo "Netscan: Returning Network Location: {$network_location->ip}\n";
       \Eventsd\Eventsd::trigger("NetworkLocationRejoined", $network_location);
     }
   }

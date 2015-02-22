@@ -1,5 +1,6 @@
 <?php
-chdir(dirname(__FILE__));
+define("APP_ROOT", dirname(__FILE__));
+chdir(APP_ROOT);
 
 if(!file_exists('./vendor/autoload.php')){
   die("You need to run <em>php composer.phar update</em> in the root directory.");
@@ -12,6 +13,7 @@ $i = 0;
 
 $loop = React\EventLoop\Factory::create();
 
+require_once("agents/bluetooth-le-scan.php");
 require_once("agents/netscan.php");
 require_once("agents/temperature.php");
 
