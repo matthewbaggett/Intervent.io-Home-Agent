@@ -4,6 +4,7 @@ use \Intervent\HomeAgents\Models\NetworkLocation;
 
 $loop->addPeriodicTimer(1, function() {
   $export_file = "nmap." . date("Y-m-D_His") . ".xml";
+  // TODO: Decide what IP ranges to scan based on machine config. Maybe look into ifconfig.
   $ip_range = "10.0.0.1-255";
   exec("nmap -sn -oX {$export_file} {$ip_range}");
   $report_xml = file_get_contents($export_file);
