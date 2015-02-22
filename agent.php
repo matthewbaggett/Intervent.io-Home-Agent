@@ -13,5 +13,6 @@ $i = 0;
 $loop = React\EventLoop\Factory::create();
 
 require_once("agents/netscan.php");
+require_once("agents/temperature.php");
 
 $loop->run();
