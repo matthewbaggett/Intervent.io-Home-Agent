@@ -11,3 +11,6 @@ set_time_limit(120);
 ini_set('memory_limit', '32M');
 date_default_timezone_set('Europe/London');
 
+define("PSI_SENSOR_ACCESS", "command");
+define("PSI_OS", "linux");
+define("PSI_DEBUG", false);
