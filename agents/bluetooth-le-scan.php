@@ -31,6 +31,8 @@ $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
       // New.
       echo "Bluetooth LE: Found new device: {$detected_mac}\n";
       \Eventsd\Eventsd::trigger("BluetoothLEFound", ["mac" => $detected_mac, "name" => $detected_name]);
+      \Eventsd\Eventsd::trigger("lights-on", []);
+      \Eventsd\Eventsd::trigger("lights-white", []);
     }
   }
 
