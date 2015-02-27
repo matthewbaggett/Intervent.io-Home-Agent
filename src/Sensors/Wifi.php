@@ -52,7 +52,6 @@ class Wifi
     $exec = explode("\n",$exec);
     $exec = array_merge(array($exec['0'].":".$exec['1']),array_slice($exec,2,-1));
     $return = array();
-    var_dump($exec);
     foreach ($exec as $value_in)
     {
       if(count(explode(":",$value_in)) > 1){

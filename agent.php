@@ -14,6 +14,7 @@ $i = 0;
 $loop = React\EventLoop\Factory::create();
 
 require_once("agents/bluetooth-le-scan.php");
+require_once("agents/heartbeat.php");
 require_once("agents/netscan.php");
 require_once("agents/temperature.php");
 require_once("agents/wifi-health.php");

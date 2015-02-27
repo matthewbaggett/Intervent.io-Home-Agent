@@ -1,13 +1,24 @@
 <?php
 
 $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
+
+  if(file_exists("bluetoothlescan.lock") && file_get_contents("bluetoothlescan.lock") == getmypid()){
+    echo "Bluetooth LE: Skipping scan, scan already running\n";
+    return;
+  }
+  file_put_contents("bluetoothlescan.lock", getmypid());
   $hci_log = APP_ROOT . "/hci.txt";
   $scan_delay = 5;
   $scan_command = "hcitool lescan > {$hci_log} & (sleep {$scan_delay}; killall -INT hcitool)";
-  //echo "Scanning for bluetooth LE devices:\n";
-  //echo " > {$scan_command}\n";
+  echo "Scanning for bluetooth LE devices:\n";
+  echo " > {$scan_command}\n";
   exec($scan_command);
   sleep(1);
+  if(!file_exists($hci_log)){
+    echo "Bluetooth LE: HCI log missing or failed to generate.\n";
+    unlink("bluetoothlescan.lock");
+    return;
+  }
   $output = file_get_contents($hci_log);
   unlink($hci_log);
   $output = explode("\n", $output);
@@ -47,6 +58,6 @@ $loop->addPeriodicTimer(1, function() use (&$existing_devices) {
   }
 
   $existing_devices = $detected_devices;
+  unlink("bluetoothlescan.lock");
 
 });
-
