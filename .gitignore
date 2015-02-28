@@ -4,3 +4,4 @@ vendor
 build
 hci.txt
 nmap.*.xml
+*.lock
