@@ -9,6 +9,7 @@ $loop->addPeriodicTimer(60, function() {
     echo "Netscan: Skipping scan, scan already running\n";
     return;
   }
+
   file_put_contents($lock_file, getmypid());
   $export_file = "/tmp/nmap." . date("Y-m-D_His") . ".xml";
   // TODO: Decide what IP ranges to scan based on machine config. Maybe look into ifconfig.

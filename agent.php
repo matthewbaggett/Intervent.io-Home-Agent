@@ -13,6 +13,9 @@ $i = 0;
 
 $loop = React\EventLoop\Factory::create();
 
+// Decide which agents to load:
+exec("which gpsd", $gpsd_present);
+var_dump($gpsd_present);exit;
 require_once("agents/location.php");
 require_once("agents/bluetooth-le-scan.php");
 require_once("agents/heartbeat.php");
