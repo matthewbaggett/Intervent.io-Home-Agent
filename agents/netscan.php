@@ -4,12 +4,13 @@ use \Intervent\HomeAgents\Models\NetworkLocation;
 
 $loop->addPeriodicTimer(60, function() {
 
-  if(file_exists("netscan.lock") && file_get_contents("netscan.lock") == getmypid()){
+  $lock_file = "/tmp/netscan.lock";
+  if(file_exists($lock_file) && file_get_contents($lock_file) == getmypid()){
     echo "Netscan: Skipping scan, scan already running\n";
     return;
   }
-  file_put_contents("netscan.lock", getmypid());
-  $export_file = "nmap." . date("Y-m-D_His") . ".xml";
+  file_put_contents($lock_file, getmypid());
+  $export_file = "/tmp/nmap." . date("Y-m-D_His") . ".xml";
   // TODO: Decide what IP ranges to scan based on machine config. Maybe look into ifconfig.
   $ip_range = "10.0.0.1-255";
   exec("nmap -sn -oX {$export_file} {$ip_range}");
@@ -68,5 +69,5 @@ $loop->addPeriodicTimer(60, function() {
       \Eventsd\Eventsd::trigger("NetworkLocationRejoined", $network_location);
     }
   }
-  unlink("netscan.lock");
+  unlink($lock_file);
 });
