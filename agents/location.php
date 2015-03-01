@@ -8,12 +8,10 @@ $loop->addPeriodicTimer(30, function() {
   $location = json_decode($json);
 
   \Eventsd\Eventsd::trigger("GPSLocation", [
-    'latitude' => $location['lat'],
-    'longitude' => $location['lon'],
-    'altitude' => $location['alt'],
-    'speed' => $location['speed']
+    'latitude' => $location->lat,
+    'longitude' => $location->lon,
+    'altitude' => $location->alt,
+    'speed' => $location->speed
   ]);
-
-
 });
 
