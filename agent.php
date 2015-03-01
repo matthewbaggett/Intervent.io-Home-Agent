@@ -15,13 +15,23 @@ $loop = React\EventLoop\Factory::create();
 
 // Decide which agents to load:
 exec("which gpsd", $gpsd_present);
-var_dump($gpsd_present);exit;
-require_once("agents/location.php");
-require_once("agents/bluetooth-le-scan.php");
+exec("which nmap", $nmap_present);
+exec("which hcitool", $bluez_present);
+exec("ifconfig wlan0", $has_wifi);
+if(count($bluez_present) == 1) {
+  require_once("agents/bluetooth-le-scan.php");
+}
 require_once("agents/heartbeat.php");
-require_once("agents/netscan.php");
+if(count($gpsd_present) == 1) {
+  require_once("agents/location.php");
+}
+if(count($nmap_present) == 1) {
+  require_once("agents/netscan.php");
+}
 require_once("agents/temperature.php");
-require_once("agents/wifi-health.php");
+if(count($has_wifi) > 0) {
+  require_once("agents/wifi-health.php");
+}
 
 echo "Starting Agent Loop\n";
 $loop->run();
