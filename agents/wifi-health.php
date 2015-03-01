@@ -18,7 +18,7 @@ $loop->addPeriodicTimer(1, function() use (&$prev_strength_db){
       $delta_strength = abs($strength_db - $prev_strength_db);
       if($delta_strength > 5) {
         $prev_strength_db = $strength_db;
-        echo "Updated Wifi Strength: {$strength_db}\n";
+        echo "Updated Wifi Strength: {$strength_db} (delta {$delta_strength})\n";
         \Eventsd\Eventsd::trigger("WifiStrength", $payload);
       }
     }
